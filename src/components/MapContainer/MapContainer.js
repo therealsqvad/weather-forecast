@@ -29,7 +29,7 @@ class MapContainer extends Component {
               color: '#fff'
             }}
             >
-              <img src={`../../img/${weatherIconMap[weatherIcon]}.png`} width="40px" alt="none" id="weatherIcon" />
+              <img src={`./icons/${weatherIconMap[weatherIcon]}.png`} width="40px" alt="none" id="weatherIcon" />
               <span className="temperatura">
                 <b>
                   {9}
