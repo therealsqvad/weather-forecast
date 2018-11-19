@@ -9,11 +9,11 @@ const finalCreateStore = compose(
   applyMiddleware(sagaMiddleware)
 )(createStore);
 
-const configureStore = initialState => {
+export const configureStore = initialState => {
   const store = finalCreateStore(rootReducer, initialState);
 
   sagaMiddleware.run(rootSagas);
   return store;
 };
 
-export default configureStore;
+// export default configureStore;
