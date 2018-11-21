@@ -2,6 +2,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import rootReducer from '../reducers';
 import rootSagas from '../sagas/index';
+// import { getLoc } from '../sagas/weather';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -13,6 +14,7 @@ export const configureStore = initialState => {
   const store = finalCreateStore(rootReducer, initialState);
 
   sagaMiddleware.run(rootSagas);
+  // sagaMiddleware.run(getLoc);
   return store;
 };
 

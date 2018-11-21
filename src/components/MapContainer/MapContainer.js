@@ -3,6 +3,10 @@ import { Map, Marker, MarkerLayout } from 'yandex-map-react';
 import propTypes from 'prop-types';
 
 class MapContainer extends Component {
+  componentDidMount() {
+    console.log('didmount');
+  }
+
   render() {
     const weatherIconMap = [
       'storm', 'storm', 'storm', 'lightning', 'lightning', 'snow', 'hail', 'hail',

@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
 import WeatherPage from './WeatherPage';
+import actions from '../actions/weather';
+import { store } from '../index';
 
-const App = props => (
-  <div>
+class App extends Component {
+  componentDidMount() {
+    console.log('component didmount');
+    store.dispatch(actions.getCurrentLoc());
+  }
 
-    <WeatherPage />
+  render() {
+    return (
+      <div>
 
-  </div>
-);
+        <WeatherPage />
+
+      </div>
+    );
+  }
+}
 
 export default App;

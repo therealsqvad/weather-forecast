@@ -3,7 +3,6 @@ import logo from '../../img/TCSlogo.svg';
 import './App.css';
 import MapContainer from '../MapContainer/MapContainer';
 
-
 class App extends Component {
   render() {
     return (

@@ -53,6 +53,9 @@ export default function(state = initialState, action) {
       return fetchWeatherSuccess(state, action);
     case FETCH_WEATHER_ERROR:
       return fetchWeatherError(state, action);
+    case 'GET_CURRENT_LOCATION_REQUESTED':
+      console.log('reducer getLoc');
+      return state;
     default:
       return state;
   }
