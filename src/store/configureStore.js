@@ -14,7 +14,6 @@ export const configureStore = initialState => {
   const store = finalCreateStore(rootReducer, initialState);
 
   sagaMiddleware.run(rootSagas);
-  // sagaMiddleware.run(getLoc);
   return store;
 };
 

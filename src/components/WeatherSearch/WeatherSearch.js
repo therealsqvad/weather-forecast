@@ -1,5 +1,5 @@
 import React from 'react';
-import WeatherCard from '../WeatherCard/WeatherCard';
+// import WeatherCard from '../WeatherCard/WeatherCard';
 import styles from './WeatherSearch.css';
 
 const WeatherSearch = ({
@@ -30,7 +30,7 @@ const WeatherSearch = ({
       }
     </div>
     {
-      weatherList.map(weather => <WeatherCard key={weather.id} {...weather} />)
+    //  weatherList.map(weather => <WeatherCard key={weather.id} {...weather} />)
     }
   </div>
 );
