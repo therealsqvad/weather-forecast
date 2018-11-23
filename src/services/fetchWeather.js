@@ -6,7 +6,7 @@ export default function(city) {
   // const url = `http://api.openweathermap.org/data/2.5/find?q=${city}&units=metric&appid=${OWM_API_KEY}`;
 
   // const url = `http://api.openweathermap.org/data/2.5/find?lat=55.0415&lon=82.9346&units=metric&appid=${OWM_API_KEY}`;
-  const DEG = 'c';
+  const DEG = localStorage.getItem('metric');
   const wsql = `select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="${city}") and u="${DEG}"`;
   // const wsql = `select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="(${lat},${lon})") and u="${DEG}"`;
   const url = `https://query.yahooapis.com/v1/public/yql?q=${encodeURIComponent(wsql)}&format=json`;

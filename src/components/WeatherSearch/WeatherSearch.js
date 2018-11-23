@@ -1,4 +1,5 @@
 import React from 'react';
+import { Switch, Button } from '@blueprintjs/core';
 // import WeatherCard from '../WeatherCard/WeatherCard';
 import styles from './WeatherSearch.css';
 
@@ -21,9 +22,12 @@ const WeatherSearch = ({
       />
 
       <div>
-        <button onClick={() => actions.fetchWeather()} disabled={loading} type="button">
+        <Button onClick={() => actions.fetchWeather()} disabled={loading} type="button">
           {loading ? 'Loading...' : 'Get weather'}
-        </button>
+        </Button>
+        <Switch checked label="Public" onChange={() => {}} />
+        <Button intent="success" text="button content" onClick={() => {}} />
+        <Button className="my-custom-class" text="customized button" />
       </div>
       {
         error && <div>Error trying to fetch a forecast</div>

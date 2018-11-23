@@ -12,6 +12,7 @@ class App extends Component {
     console.log('component didmount');
     // eslint-disable-next-line react/destructuring-assignment
     this.props.disp();
+    localStorage.setItem('metric', 'C');
     // console.log('store:', this.props.store);
   }
 
@@ -22,7 +23,9 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <WeatherPage />
           <MapContainer lat={55.24} lon={54.3} weatherIcon={3} />
-
+          <a href="https://www.yahoo.com/?ilc=401" target="_blank" rel="noopener noreferrer">
+            <img src="https://poweredby.yahoo.com/white.png" width="134" height="29" alt="Powered by Yahoo" />
+          </a>
           {/* <span>Store: {this.props.store}</span> */}
         </header>
       </div>
