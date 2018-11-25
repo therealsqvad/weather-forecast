@@ -10,13 +10,11 @@ export default async() => {
     try {
       const position = await promise;
 
-      console.log(position);
       return { lat: position.coords.latitude, lon: position.coords.longitude };
     } catch (e) {
       const response = await fetch('http://api.sypexgeo.net/json/');
       const json = await response.json();
 
-      console.log(json);
       return { lat: json.city.lat, lon: json.city.lon };
     }
   }

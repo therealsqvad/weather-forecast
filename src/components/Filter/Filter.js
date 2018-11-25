@@ -1,16 +1,17 @@
+/* eslint-disable react/no-find-dom-node */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { yellow } from '@material-ui/core/colors';
 
 const yellowTheme = createMuiTheme({
-  palette: { primary: yellow },
+  palette: { type: 'dark', primary: yellow },
   typography: {
     useNextVariants: true
   }
@@ -33,7 +34,7 @@ const styles = theme => ({
 
 class Filter extends Component {
     state = {
-      age: '',
+      metric: localStorage.getItem('metric') === null ? 'C' : localStorage.getItem('metric'),
       labelWidth: 0
     };
 
@@ -45,11 +46,12 @@ class Filter extends Component {
 
     handleChange = event => {
       localStorage.setItem('metric', event.target.value);
-      this.setState({ [event.target.name]: event.target.value });
+      this.setState({ metric: event.target.value });
     };
 
     render() {
       const { classes } = this.props;
+      const { labelWidth, metric } = this.state;
 
       return (
         <MuiThemeProvider theme={yellowTheme}>
@@ -63,11 +65,11 @@ class Filter extends Component {
           Metric
             </InputLabel>
             <Select
-              value={this.state.age}
+              value={metric}
               onChange={this.handleChange}
               input={(
                 <OutlinedInput
-                  labelWidth={this.state.labelWidth}
+                  labelWidth={labelWidth}
                   name="age"
                   id="outlined-age-simple"
                 />

@@ -5,10 +5,6 @@ import { connect } from 'react-redux';
 import actions from '../../actions/weather';
 
 class MapContainer extends Component {
-  componentDidMount() {
-    console.log('didmount');
-  }
-
   render() {
     const weatherIconMap = [
       'storm', 'storm', 'storm', 'lightning', 'lightning', 'snow', 'hail', 'hail',
@@ -23,7 +19,17 @@ class MapContainer extends Component {
     };
     const { store } = this.props;
     const { weather } = store;
-    const { lat, lon } = weather;
+    const { forecast } = weather;
+    const {
+      temp, icon
+    } = forecast;
+
+    let { lat, lon } = forecast;
+
+    if (lat === undefined) {
+      lat = weather.lat;
+      lon = weather.lon;
+    }
 
     return (
       <Map className="map" width="300px" height="300px" state={mapState} center={[lat, lon]} zoom={10} lang="en_US">
@@ -36,10 +42,10 @@ class MapContainer extends Component {
               color: '#fff'
             }}
             >
-              <img src={`./icons/${weatherIconMap[2]}.png`} width="40px" alt="none" id="weatherIcon" />
+              <img src={`./icons/${weatherIconMap[icon]}.png`} width="40px" alt="none" id="weatherIcon" />
               <span className="temperatura">
                 <b>
-                  {9}
+                  {temp}
                 </b>
               </span>
             </div>

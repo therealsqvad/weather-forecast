@@ -12,7 +12,6 @@ export default function(city, date) {
     DEG = 'C';
   }
   const wsql = `select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="${city}") and u="${DEG}"`;
-  // const wsql = `select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="(${lat},${lon})") and u="${DEG}"`;
   const url = `https://query.yahooapis.com/v1/public/yql?q=${encodeURIComponent(wsql)}&format=json`;
   const TTL = 60;
   const Data = (new Date()).getTime();
@@ -22,26 +21,21 @@ export default function(city, date) {
   weatherDB.getItem(city).then(forecast => {
     if (forecast !== null) {
       if (Data - TTL * 1000 < forecast.time) {
-        console.log('ok read DB', forecast);
         result = forecast;
       } else {
         result = undefined;
       }
     }
   }).catch(() => {
-    console.log('error read');
   });
 
-  console.log(result);
-  console.log(url);
   if (result === undefined) {
     return fetch(url)
       .then(response => response.json())
       .then(json => {
-        console.log(json);
         if (json.cod === 404) { return []; }
-        const Data = (new Date()).getTime();
-        const outJSON = { json, TTL, time: Data };
+        const time = (new Date()).getTime();
+        const outJSON = { json, TTL, time };
         const JSONparsed = json.query.results.channel;
 
         const d1 = new Date(date);
@@ -56,7 +50,7 @@ export default function(city, date) {
 
         console.log(JSONparsed.item.forecast[i]);
         console.log('diff day:', i, d1, d2);
-
+        console.log(JSONparsed);
         weatherDB.setItem(city, outJSON);
 
 
@@ -64,9 +58,12 @@ export default function(city, date) {
           city: JSONparsed.location.city,
           country: JSONparsed.location.country,
           temp: JSONparsed.item.condition.temp,
-          icon: JSONparsed.item.condition.code
-          // description: listItem.weather[0].main,
-          // icon: listItem.weather[0].icon
+          icon: JSONparsed.item.condition.code,
+          lat: JSONparsed.item.lat,
+          lon: JSONparsed.item.long,
+          dayMax: JSONparsed.item.forecast[i].high,
+          dayMin: JSONparsed.item.forecast[i].low,
+          dayCode: JSONparsed.item.forecast[i].code
         };
       });
   }

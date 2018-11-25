@@ -10,13 +10,9 @@ export function* fetchWeather() {
     const searchText = yield select(weatherSelector.getSearchText);
     const searchDate = yield select(weatherSelector.getSearchDate);
 
-    // const resp = yield call(fetchLocation);
     const response = yield call(fetchWeatherService, searchText, searchDate);
 
-    // console.log('resp:', resp);
-
     yield put(weatherActions.fetchWeatherSucces(response));
-    // yield put(weatherActions.fetchWeatherSucces(resp));
   } catch (error) {
     yield put(weatherActions.fetchWeatherError(error));
   }
@@ -27,10 +23,7 @@ export function* watchFetchWeather() {
 }
 
 export function* getLocation() {
-  console.log('fetchLoc');
   const resp = yield call(fetchLocation);
-
-  console.log(resp);
 
   yield put(weatherActions.getLocSucces(resp));
 }

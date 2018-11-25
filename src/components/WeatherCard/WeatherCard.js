@@ -1,12 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+// import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
+// import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 // import styles from './WeatherCard.css';
+import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { yellow } from '@material-ui/core/colors';
+
+const yellowTheme = createMuiTheme({
+  palette: { type: 'dark', primary: yellow },
+  typography: {
+    useNextVariants: true
+  }
+});
 
 const styles = {
   card: {
@@ -27,10 +35,8 @@ const styles = {
 
 const WeatherCard = ({
   // eslint-disable-next-line react/prop-types
-  icon, temp, description, city, country, classes
+  icon, temp, city, country, classes, dayMin, dayMax, dayCode, searchDate
 }) => {
-  // const { classes } = props;
-  const bull = <span className={classes.bullet}>•</span>;
   const weatherIconMap = [
     'storm', 'storm', 'storm', 'lightning', 'lightning', 'snow', 'hail', 'hail',
     'drizzle', 'drizzle', 'rain', 'rain', 'rain', 'snow', 'snow', 'snow', 'snow',
@@ -42,55 +48,60 @@ const WeatherCard = ({
 
   return (
     <div className={styles.wrapper}>
-      <Card className={classes.card}>
-        <CardContent>
-          <Typography className={classes.title} color="textSecondary" gutterBottom>
-          Word of the Day
-          </Typography>
-          <Typography variant="h5" component="h2">
-          be
-            {bull}
-          nev
-            {bull}
-o
-            {bull}
-          lent
-          </Typography>
-          <Typography className={classes.pos} color="textSecondary">
-            <img src={`./icons/${weatherIconMap[icon]}.png`} width="40px" alt="icon not found" id="weatherIcon" />
+      <MuiThemeProvider theme={yellowTheme}>
 
-            {/* <h3> */}
-            {/* {description} */}
-            {/* {' '} */}
-            {temp}
-            {/* {' '} */}
-            {/* ºC */}
-            {/* </h3> */}
+        <Card className={classes.card}>
+          <CardContent>
+            <Typography color="primary" gutterBottom variant="h4" component="h2">
+          Текущая погода:
+            </Typography>
+            <Typography className={classes.pos} variant="h5" color="textSecondary">
+              <img src={`./icons/${weatherIconMap[icon]}.png`} width="40px" alt="icon not found" id="weatherIcon" hidden={icon === undefined} />
 
-            {/* <h1> */}
-            {/* {city} */}
-            {/* , */}
-            {/* {' '} */}
-            {/* {country} */}
-            {/* </h1> */}
-          </Typography>
-          <Typography component="p">
-          well meaning and kindly.
-            <br />
-            {'"a benevolent smile"'}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small">Learn More</Button>
-        </CardActions>
-      </Card>
+              {temp}
+              <br />
+              {city}
+              <br />
+              {country}
+              <br />
+              Прогноз на
+              {' '}
+              {searchDate}
+              {' '}
+              <br />
+              <img src={`./icons/${weatherIconMap[dayCode]}.png`} width="40px" alt="icon not found" id="weatherIcon" hidden={icon === undefined} />
+              {dayMin}
+/
+              {dayMax}
+
+              {/* <h3> */}
+              {/* {description} */}
+
+              {/* {' '} */}
+              {/* ºC */}
+              {/* </h3> */}
+
+              {/* <h1> */}
+              {/* {city} */}
+              {/* , */}
+              {/* {' '} */}
+              {/* {country} */}
+              {/* </h1> */}
+            </Typography>
+
+          </CardContent>
+          {/* <CardActions>
+            <Button size="small">Learn More</Button>
+          </CardActions> */}
+        </Card>
+      </MuiThemeProvider>
     </div>
   );
 };
 
 WeatherCard.propTypes = {
   // icon: PropTypes.string.isRequired,
-  temp: PropTypes.number.isRequired
+  // temp: PropTypes.string.isRequired
   // description: PropTypes.string.isRequired,
   // city: PropTypes.string.isRequired,
   // country: PropTypes.string.isRequired

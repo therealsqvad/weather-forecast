@@ -11,7 +11,6 @@ import Filter from '../Filter/Filter';
 
 class App extends Component {
   componentDidMount() {
-    console.log('component didmount');
     // eslint-disable-next-line react/destructuring-assignment
     const { disp, store } = this.props;
 
@@ -26,7 +25,12 @@ class App extends Component {
     const { forecast } = weather;
 
     console.log('forecast in app', forecast);
-    const { temp, icon } = forecast;
+    const {
+      temp, icon, city, country, dayMax, dayMin, dayCode
+    } = forecast;
+    const {
+      lat, lon, searchDate
+    } = weather;
 
     return (
       <div className="App">
@@ -34,14 +38,20 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <Filter />
           <WeatherPage />
-          <MapContainer lat={55.24} lon={54.3} weatherIcon={3} />
-          <a href="https://www.yahoo.com/?ilc=401" target="_blank" rel="noopener noreferrer">
-            <img src="https://poweredby.yahoo.com/white.png" width="134" height="29" alt="Powered by Yahoo" />
-          </a>
-          {/* <span>Store: {this.props.store}</span> */}
-          <WeatherCard temp={temp} icon={icon} />
+          <div style={{ flexDirection: 'row' }}>
+            <div style={{ float: 'left' }}>
+              <MapContainer lat={lat} lon={lon} weatherIcon={icon} />
+              <a href="https://www.yahoo.com/?ilc=401" target="_blank" rel="noopener noreferrer">
+                <img src="https://poweredby.yahoo.com/white.png" width="134" height="29" alt="Powered by Yahoo" />
+              </a>
+            </div>
+            <div style={{ float: 'left', padding: '10px' }}>
+              <WeatherCard temp={temp} icon={icon} city={city} country={country} dayMax={dayMax} dayMin={dayMin} dayCode={dayCode} searchDate={searchDate} />
+            </div>
+          </div>
         </header>
       </div>
+
     );
   }
 }

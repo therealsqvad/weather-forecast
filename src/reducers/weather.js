@@ -79,10 +79,8 @@ const FETCH_WEATHER_ERROR = 'FETCH_WEATHER_ERROR';
 export default function(state = initialState, action) {
   switch (action.type) {
     case SET_SEARCH_TEXT:
-      console.log(action);
       return setSearchText(state, action);
     case SET_SEARCH_DATE:
-      console.log(action);
       return setSearchDate(state, action);
     case FETCH_WEATHER:
       return fetchWeather(state, action);
@@ -91,10 +89,8 @@ export default function(state = initialState, action) {
     case FETCH_WEATHER_ERROR:
       return fetchWeatherError(state, action);
     case 'GET_CURRENT_LOCATION_REQUESTED':
-      console.log('reducer getLoc', action);
       return fetchLocation(state, action);
     case 'GET_LOCATION_SUCCEED':
-      console.log('reducer getLoc done', action);
       return setLocation(state, action);
     default:
       return state;

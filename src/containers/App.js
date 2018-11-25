@@ -8,7 +8,6 @@ import MapContainer from '../components/MapContainer/MapContainer';
 
 class App extends Component {
   componentDidMount() {
-    console.log('component didmount');
     const { disp } = this.props;
 
     disp();
