@@ -1,14 +1,38 @@
+const now = `${(new Date()).getFullYear()}-${(new Date()).getMonth() + 1}-${(new Date()).getDate()}`;
+
 const initialState = {
-  weatherList: [],
+  forecast: {
+    city: '',
+    temp: 0
+
+  },
   loading: false,
   error: null,
-  searchText: ''
+  searchText: '',
+  lat: 0,
+  lon: 0,
+  date: now
 };
 
 function setSearchText(state, { searchText }) {
   return {
     ...state,
     searchText
+  };
+}
+
+function setLocation(state, { location }) {
+  return {
+    ...state,
+    lat: location.lat,
+    lon: location.lon
+  };
+}
+
+function setSearchDate(state, { searchDate }) {
+  return {
+    ...state,
+    searchDate
   };
 }
 
@@ -21,12 +45,12 @@ function fetchWeather(state) {
   };
 }
 
-function fetchWeatherSuccess(state, { weatherList }) {
+function fetchWeatherSuccess(state, { forecast }) {
   return {
     ...state,
     error: null,
     loading: false,
-    weatherList
+    forecast
   };
 }
 
@@ -38,7 +62,16 @@ function fetchWeatherError(state, { error }) {
   };
 }
 
+function fetchLocation(state, { lat, lon }) {
+  return {
+    ...state,
+    lat,
+    lon
+  };
+}
+
 const SET_SEARCH_TEXT = 'SET_SEARCH_TEXT';
+const SET_SEARCH_DATE = 'SET_SEARCH_DATE';
 const FETCH_WEATHER = 'FETCH_WEATHER';
 const FETCH_WEATHER_SUCCESS = 'FETCH_WEATHER_SUCCESS';
 const FETCH_WEATHER_ERROR = 'FETCH_WEATHER_ERROR';
@@ -46,7 +79,11 @@ const FETCH_WEATHER_ERROR = 'FETCH_WEATHER_ERROR';
 export default function(state = initialState, action) {
   switch (action.type) {
     case SET_SEARCH_TEXT:
+      console.log(action);
       return setSearchText(state, action);
+    case SET_SEARCH_DATE:
+      console.log(action);
+      return setSearchDate(state, action);
     case FETCH_WEATHER:
       return fetchWeather(state, action);
     case FETCH_WEATHER_SUCCESS:
@@ -54,8 +91,11 @@ export default function(state = initialState, action) {
     case FETCH_WEATHER_ERROR:
       return fetchWeatherError(state, action);
     case 'GET_CURRENT_LOCATION_REQUESTED':
-      console.log('reducer getLoc');
-      return state;
+      console.log('reducer getLoc', action);
+      return fetchLocation(state, action);
+    case 'GET_LOCATION_SUCCEED':
+      console.log('reducer getLoc done', action);
+      return setLocation(state, action);
     default:
       return state;
   }

@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^3.5.1",
+    "material-ui-next-pickers": "0.0.15",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-scripts": "2.1.1"
@@ -23,12 +25,12 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@blueprintjs/core": "^3.9.0",
     "eslint": "^5.9.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",
     "localforage": "^1.7.3",
     "prop-types": "^15.6.2",
+    "react-addons-css-transition-group": "^15.6.2",
     "react-redux": "^5.1.1",
     "redux": "^4.0.1",
     "redux-saga": "^0.16.2",

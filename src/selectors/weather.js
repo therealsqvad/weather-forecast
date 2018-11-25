@@ -1,3 +1,4 @@
 export default {
-  getSearchText: state => state.weather.searchText
+  getSearchText: state => state.weather.searchText,
+  getSearchDate: state => state.weather.searchDate
 };

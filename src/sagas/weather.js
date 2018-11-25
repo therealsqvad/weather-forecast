@@ -8,8 +8,10 @@ import weatherSelector from '../selectors/weather';
 export function* fetchWeather() {
   try {
     const searchText = yield select(weatherSelector.getSearchText);
+    const searchDate = yield select(weatherSelector.getSearchDate);
+
     // const resp = yield call(fetchLocation);
-    const response = yield call(fetchWeatherService, searchText);
+    const response = yield call(fetchWeatherService, searchText, searchDate);
 
     // console.log('resp:', resp);
 
@@ -29,6 +31,8 @@ export function* getLocation() {
   const resp = yield call(fetchLocation);
 
   console.log(resp);
+
+  yield put(weatherActions.getLocSucces(resp));
 }
 
 export function* getLoc() {

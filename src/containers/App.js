@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import WeatherPage from './WeatherPage';
 import actions from '../actions/weather';
-import { store } from '../index';
 import MapContainer from '../components/MapContainer/MapContainer';
 
 
 class App extends Component {
   componentDidMount() {
     console.log('component didmount');
-    store.dispatch(actions.getCurrentLoc());
+    const { disp } = this.props;
+
+    disp();
   }
 
   render() {
@@ -23,4 +26,17 @@ class App extends Component {
   }
 }
 
-export default App;
+App.propTypes = {
+  disp: PropTypes.func.isRequired
+};
+
+export default connect(
+  state => ({
+    store: state
+  }),
+  dispatch => ({
+    disp: date => {
+      dispatch(actions.getCurrentLoc());
+    }
+  })
+)(App);

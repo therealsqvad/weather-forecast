@@ -1,11 +1,21 @@
 import React from 'react';
-import { Switch, Button } from '@blueprintjs/core';
+import { Button } from '@material-ui/core';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { yellow } from '@material-ui/core/colors';
 // import WeatherCard from '../WeatherCard/WeatherCard';
 import styles from './WeatherSearch.css';
+import SearchDate from '../SearchDate/SearchDate';
+
+const yellowTheme = createMuiTheme({
+  palette: { primary: yellow },
+  typography: {
+    useNextVariants: true
+  }
+});
 
 const WeatherSearch = ({
   // eslint-disable-next-line react/prop-types
-  searchText, loading, error, weatherList = [], actions
+  searchText = '', loading, error, weatherList = [], actions
 }) => (
   <div>
     <div className={styles.searchBox}>
@@ -20,15 +30,17 @@ const WeatherSearch = ({
           }
         }}
       />
+      <div style={{ textAlign: 'center', marginTop: 5, marginBottom: 5 }}>
+        <MuiThemeProvider theme={yellowTheme}>
+          <Button color="primary" variant="contained" onClick={() => actions.fetchWeather()} disabled={loading}>
+            {loading ? 'Loading...' : 'Get weather'}
+          </Button>
+          <br />
+          <SearchDate />
+        </MuiThemeProvider>
 
-      <div>
-        <Button onClick={() => actions.fetchWeather()} disabled={loading} type="button">
-          {loading ? 'Loading...' : 'Get weather'}
-        </Button>
-        <Switch checked label="Public" onChange={() => {}} />
-        <Button intent="success" text="button content" onClick={() => {}} />
-        <Button className="my-custom-class" text="customized button" />
       </div>
+
       {
         error && <div>Error trying to fetch a forecast</div>
       }
