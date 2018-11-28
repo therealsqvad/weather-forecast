@@ -1,11 +1,6 @@
-/* eslint-disable max-statements */
-// const OWM_API_KEY = 'cce420b78c35e958844f8e4cd0048d56';
 import localforage from 'localforage';
-// import weather from '../reducers/weather';
 
 export default function(city, date) {
-  // const url = `http://api.openweathermap.org/data/2.5/find?q=${city}&units=metric&appid=${OWM_API_KEY}`;
-  // const url = `http://api.openweathermap.org/data/2.5/find?lat=55.0415&lon=82.9346&units=metric&appid=${OWM_API_KEY}`;
   let DEG = localStorage.getItem('metric');
 
   if (DEG === null) {
@@ -47,12 +42,7 @@ export default function(city, date) {
 
           i = Math.ceil(timeDiff / (1000 * 3600 * 24));
         }
-
-        console.log(JSONparsed.item.forecast[i]);
-        console.log('diff day:', i, d1, d2);
-        console.log(JSONparsed);
         weatherDB.setItem(city, outJSON);
-
 
         return {
           city: JSONparsed.location.city,

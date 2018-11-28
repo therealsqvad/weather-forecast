@@ -28,7 +28,6 @@ export function* getLocation() {
 
   yield put(weatherActions.getLocSucces(resp));
   yield put(weatherActions.setSearchText(city));
-  // yield put(weatherActions.setSearchDate('2018-11-28'));
   yield put(weatherActions.fetchWeather());
 }
 

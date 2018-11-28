@@ -3,8 +3,12 @@ const now = `${(new Date()).getFullYear()}-${(new Date()).getMonth() + 1}-${(new
 const initialState = {
   forecast: {
     city: '',
-    temp: 0
-
+    country: '',
+    icon: '',
+    temp: '',
+    dayMin: '',
+    dayMax: '',
+    dayCode: ''
   },
   loading: false,
   error: null,
@@ -39,7 +43,6 @@ function setSearchDate(state, { searchDate }) {
 function fetchWeather(state) {
   return {
     ...state,
-    weatherList: [],
     error: null,
     loading: true
   };

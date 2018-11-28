@@ -11,7 +11,6 @@ import Filter from '../Filter/Filter';
 
 class App extends Component {
   componentDidMount() {
-    // eslint-disable-next-line react/destructuring-assignment
     const { disp, store } = this.props;
 
     console.log(store);
@@ -45,7 +44,16 @@ class App extends Component {
               </a>
             </div>
             <div style={{ float: 'left', padding: '10px' }}>
-              <WeatherCard temp={temp} icon={icon} city={city} country={country} dayMax={dayMax} dayMin={dayMin} dayCode={dayCode} searchDate={searchDate} />
+              <WeatherCard
+                temp={temp}
+                icon={icon}
+                city={city}
+                country={country}
+                dayMax={dayMax}
+                dayMin={dayMin}
+                dayCode={dayCode}
+                searchDate={searchDate}
+              />
             </div>
           </div>
         </header>

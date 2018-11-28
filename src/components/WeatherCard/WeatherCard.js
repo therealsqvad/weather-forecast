@@ -1,13 +1,12 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
-// import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-// import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-// import styles from './WeatherCard.css';
 import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { yellow } from '@material-ui/core/colors';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 
 const yellowTheme = createMuiTheme({
   palette: { type: 'dark', primary: yellow },
@@ -37,6 +36,7 @@ const WeatherCard = ({
   // eslint-disable-next-line react/prop-types
   icon, temp, city, country, classes, dayMin, dayMax, dayCode, searchDate
 }) => {
+  console.log('dayMin', typeof (dayMin));
   const weatherIconMap = [
     'storm', 'storm', 'storm', 'lightning', 'lightning', 'snow', 'hail', 'hail',
     'drizzle', 'drizzle', 'rain', 'rain', 'rain', 'snow', 'snow', 'snow', 'snow',
@@ -45,6 +45,7 @@ const WeatherCard = ({
     'moon', 'sun', 'hail', 'sun', 'lightning', 'lightning', 'lightning', 'rain',
     'snowflake', 'snowflake', 'snowflake', 'cloud', 'rain', 'snow', 'lightning'
   ];
+  const iconSrc = `./icons/${weatherIconMap[dayCode]}.png`;
 
   return (
     <div className={styles.wrapper}>
@@ -52,43 +53,37 @@ const WeatherCard = ({
 
         <Card className={classes.card}>
           <CardContent>
-            <Typography color="primary" gutterBottom variant="h4" component="h2">
+
+            {temp === undefined ? <CircularProgress className={classes.progress} /> : (
+
+              <div>
+                <Typography color="primary" gutterBottom variant="h4" component="h2">
           Current weather:
-            </Typography>
-            <Typography className={classes.pos} variant="h5" color="textSecondary">
-              <img src={`./icons/${weatherIconMap[icon]}.png`} width="40px" alt="icon not found" id="weatherIcon" hidden={icon === undefined} />
+                </Typography>
+                <Typography className={classes.pos} variant="h5" color="textSecondary">
+                  <img src={iconSrc} width="40px" alt="icon not found" id="weatherIcon" hidden={icon === undefined} />
 
-              {temp}
-              <br />
-              {city}
-              <br />
-              {country}
-              <br />
+                  {temp}
+                  °
+                  <br />
+                  {city}
+                  <br />
+                  {country}
+                  <br />
               Forecast on
-              {' '}
-              {searchDate}
-              {' '}
-              <br />
-              <img src={`./icons/${weatherIconMap[dayCode]}.png`} width="40px" alt="icon not found" id="weatherIcon" hidden={icon === undefined} />
-              {dayMin}
-/
-              {dayMax}
+                  {' '}
+                  {searchDate}
+                  {' '}
+                  <br />
+                  <img src={iconSrc} width="40px" alt="icon not found" id="weatherIcon" hidden={icon === undefined} />
+                  {dayMin}
+                  °
+                  /
+                  {dayMax}
+                  °
+                </Typography>
 
-              {/* <h3> */}
-              {/* {description} */}
-
-              {/* {' '} */}
-              {/* ºC */}
-              {/* </h3> */}
-
-              {/* <h1> */}
-              {/* {city} */}
-              {/* , */}
-              {/* {' '} */}
-              {/* {country} */}
-              {/* </h1> */}
-            </Typography>
-
+              </div>)}
           </CardContent>
           {/* <CardActions>
             <Button size="small">Learn More</Button>
@@ -100,11 +95,16 @@ const WeatherCard = ({
 };
 
 WeatherCard.propTypes = {
-  // icon: PropTypes.string.isRequired,
-  // temp: PropTypes.string.isRequired
-  // description: PropTypes.string.isRequired,
-  // city: PropTypes.string.isRequired,
-  // country: PropTypes.string.isRequired
+  icon: PropTypes.string.isRequired,
+  temp: PropTypes.string.isRequired,
+  city: PropTypes.string.isRequired,
+  country: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  classes: PropTypes.object.isRequired,
+  dayMin: PropTypes.string.isRequired,
+  dayMax: PropTypes.string.isRequired,
+  dayCode: PropTypes.string.isRequired,
+  searchDate: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(WeatherCard);

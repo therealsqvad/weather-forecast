@@ -32,7 +32,15 @@ class MapContainer extends Component {
     }
 
     return (
-      <Map className="map" width="300px" height="300px" state={mapState} center={[latitude, longitude]} zoom={5} loadOptions={{ lang: 'en_US' }}>
+      <Map
+        className="map"
+        width="300px"
+        height="300px"
+        state={mapState}
+        center={[latitude, longitude]}
+        zoom={5}
+        loadOptions={{ lang: 'en_US' }}
+      >
         <Marker lat={parseFloat(latitude, 6)} lon={parseFloat(longitude, 6)}>
           <MarkerLayout>
             <div style={{
@@ -46,6 +54,7 @@ class MapContainer extends Component {
               <span className="temperatura">
                 <b>
                   {temp}
+                  °
                 </b>
               </span>
             </div>

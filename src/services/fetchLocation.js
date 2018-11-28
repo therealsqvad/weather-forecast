@@ -1,6 +1,5 @@
 export default async() => {
   if (navigator.geolocation) {
-    // Передаем две функции
     const promise = new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition(
         position => resolve(position), reject()
