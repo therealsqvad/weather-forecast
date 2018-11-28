@@ -13,7 +13,7 @@ export default function(city, date) {
   }
   const wsql = `select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="${city}") and u="${DEG}"`;
   const url = `https://query.yahooapis.com/v1/public/yql?q=${encodeURIComponent(wsql)}&format=json`;
-  const TTL = 60;
+  const TTL = localStorage.getItem('TTL');
   const Data = (new Date()).getTime();
   const weatherDB = localforage.createInstance({ name: 'forecasts', storeName: 'forecasts' });
   let result;
@@ -59,8 +59,8 @@ export default function(city, date) {
           country: JSONparsed.location.country,
           temp: JSONparsed.item.condition.temp,
           icon: JSONparsed.item.condition.code,
-          lat: JSONparsed.item.lat,
-          lon: JSONparsed.item.long,
+          latitude: JSONparsed.item.lat,
+          longitude: JSONparsed.item.long,
           dayMax: JSONparsed.item.forecast[i].high,
           dayMin: JSONparsed.item.forecast[i].low,
           dayCode: JSONparsed.item.forecast[i].code

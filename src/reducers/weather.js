@@ -11,7 +11,7 @@ const initialState = {
   searchText: '',
   lat: 0,
   lon: 0,
-  date: now
+  searchDate: now
 };
 
 function setSearchText(state, { searchText }) {
@@ -75,6 +75,8 @@ const SET_SEARCH_DATE = 'SET_SEARCH_DATE';
 const FETCH_WEATHER = 'FETCH_WEATHER';
 const FETCH_WEATHER_SUCCESS = 'FETCH_WEATHER_SUCCESS';
 const FETCH_WEATHER_ERROR = 'FETCH_WEATHER_ERROR';
+const GET_CURRENT_LOCATION_REQUESTED = 'GET_CURRENT_LOCATION_REQUESTED';
+const GET_LOCATION_SUCCEED = 'GET_LOCATION_SUCCEED';
 
 export default function(state = initialState, action) {
   switch (action.type) {
@@ -88,9 +90,9 @@ export default function(state = initialState, action) {
       return fetchWeatherSuccess(state, action);
     case FETCH_WEATHER_ERROR:
       return fetchWeatherError(state, action);
-    case 'GET_CURRENT_LOCATION_REQUESTED':
+    case GET_CURRENT_LOCATION_REQUESTED:
       return fetchLocation(state, action);
-    case 'GET_LOCATION_SUCCEED':
+    case GET_LOCATION_SUCCEED:
       return setLocation(state, action);
     default:
       return state;

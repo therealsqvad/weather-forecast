@@ -16,7 +16,6 @@ class App extends Component {
 
     console.log(store);
     disp();
-    localStorage.setItem('metric', 'C');
   }
 
   render() {
@@ -36,7 +35,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <Filter />
+          <Filter style={{ flexDirection: 'row' }} />
           <WeatherPage />
           <div style={{ flexDirection: 'row' }}>
             <div style={{ float: 'left' }}>
@@ -67,7 +66,7 @@ export default connect(
     store: state
   }),
   dispatch => ({
-    disp: () => {
+    disp: text => {
       dispatch(actions.getCurrentLoc());
     }
   })

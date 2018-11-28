@@ -53,7 +53,7 @@ const WeatherCard = ({
         <Card className={classes.card}>
           <CardContent>
             <Typography color="primary" gutterBottom variant="h4" component="h2">
-          Текущая погода:
+          Current weather:
             </Typography>
             <Typography className={classes.pos} variant="h5" color="textSecondary">
               <img src={`./icons/${weatherIconMap[icon]}.png`} width="40px" alt="icon not found" id="weatherIcon" hidden={icon === undefined} />
@@ -64,7 +64,7 @@ const WeatherCard = ({
               <br />
               {country}
               <br />
-              Прогноз на
+              Forecast on
               {' '}
               {searchDate}
               {' '}

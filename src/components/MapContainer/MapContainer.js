@@ -24,20 +24,20 @@ class MapContainer extends Component {
       temp, icon
     } = forecast;
 
-    let { lat, lon } = forecast;
+    let { latitude, longitude } = forecast;
 
-    if (lat === undefined) {
-      lat = weather.lat;
-      lon = weather.lon;
+    if (latitude === undefined) {
+      latitude = weather.lat;
+      longitude = weather.lon;
     }
 
     return (
-      <Map className="map" width="300px" height="300px" state={mapState} center={[lat, lon]} zoom={10} lang="en_US">
-        <Marker lat={parseFloat(lat, 6)} lon={parseFloat(lon, 6)}>
+      <Map className="map" width="300px" height="300px" state={mapState} center={[latitude, longitude]} zoom={5} loadOptions={{ lang: 'en_US' }}>
+        <Marker lat={parseFloat(latitude, 6)} lon={parseFloat(longitude, 6)}>
           <MarkerLayout>
             <div style={{
               borderRadius: '8px',
-              background: 'rgba(40, 44, 52, 0.3)',
+              background: 'rgba(33, 33, 33, 0.3)',
               shadow: '13px',
               color: '#fff'
             }}

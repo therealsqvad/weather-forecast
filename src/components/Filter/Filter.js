@@ -35,23 +35,33 @@ const styles = theme => ({
 class Filter extends Component {
     state = {
       metric: localStorage.getItem('metric') === null ? 'C' : localStorage.getItem('metric'),
-      labelWidth: 0
+      TTL: localStorage.getItem('TTL') === null ? '60' : localStorage.getItem('TTL'),
+      labelWidth: 0,
+      labelWidthTTL: 0
     };
 
     componentDidMount() {
       this.setState({
-        labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth
+        labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
+        labelWidthTTL: ReactDOM.findDOMNode(this.InputLabelRefa).offsetWidth
       });
     }
 
-    handleChange = event => {
+    handleChangeMetric = event => {
       localStorage.setItem('metric', event.target.value);
       this.setState({ metric: event.target.value });
     };
 
+    handleChangeTTL = event => {
+      localStorage.setItem('TTL', event.target.value);
+      this.setState({ TTL: event.target.value });
+    };
+
     render() {
       const { classes } = this.props;
-      const { labelWidth, metric } = this.state;
+      const {
+        labelWidth, labelWidthTTL, metric, TTL
+      } = this.state;
 
       return (
         <MuiThemeProvider theme={yellowTheme}>
@@ -60,23 +70,47 @@ class Filter extends Component {
               ref={ref => {
                 this.InputLabelRef = ref;
               }}
-              htmlFor="outlined-age-simple"
+              htmlFor="outlined-metric-simple"
             >
           Metric
             </InputLabel>
             <Select
               value={metric}
-              onChange={this.handleChange}
+              onChange={this.handleChangeMetric}
               input={(
                 <OutlinedInput
                   labelWidth={labelWidth}
-                  name="age"
-                  id="outlined-age-simple"
+                  name="metric"
+                  id="outlined-metric-simple"
                 />
               )}
             >
               <MenuItem value="C">Celsium</MenuItem>
               <MenuItem value="F">Farengate</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl variant="outlined" className={classes.formControl}>
+            <InputLabel
+              ref={refa => {
+                this.InputLabelRefa = refa;
+              }}
+              htmlFor="outlined-TTL-simple"
+            >
+          TTL
+            </InputLabel>
+            <Select
+              value={TTL}
+              onChange={this.handleChangeTTL}
+              input={(
+                <OutlinedInput
+                  labelWidth={labelWidthTTL}
+                  name="TTL"
+                  id="outlined-TTL-simple"
+                />
+              )}
+            >
+              <MenuItem value="60">One minute</MenuItem>
+              <MenuItem value="600">10 minutes</MenuItem>
             </Select>
           </FormControl>
         </MuiThemeProvider>
