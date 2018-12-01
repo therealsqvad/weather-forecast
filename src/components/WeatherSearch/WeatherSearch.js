@@ -69,12 +69,13 @@ class WeatherSearch extends Component {
                 }}
               />
               <br />
-
-              {loading ? <CircularProgress className={classes.progress} /> : (
-                <Button color="primary" variant="contained" onClick={() => actions.fetchWeather()} disabled={loading}>
-                  {loading ? 'Loading...' : 'Get weather'}
-                </Button>
-              )}
+              <div style={{ minHeight: '55px', alignItems: 'center' }}>
+                {loading ? <CircularProgress className={classes.progress} size={20} /> : (
+                  <Button color="primary" variant="contained" onClick={() => actions.fetchWeather()} disabled={loading}>
+                    {loading ? 'Loading...' : 'Get weather'}
+                  </Button>
+                )}
+              </div>
               <div style={{ margin: '5px' }}>
                 <Button color="primary" variant="contained" onClick={() => actions.getCurrentLoc()}>
                   {'Geoposition'}

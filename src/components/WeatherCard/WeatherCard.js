@@ -36,7 +36,6 @@ const WeatherCard = ({
   // eslint-disable-next-line react/prop-types
   icon, temp, city, country, classes, dayMin, dayMax, dayCode, searchDate
 }) => {
-  console.log('dayMin', typeof (dayMin));
   const weatherIconMap = [
     'storm', 'storm', 'storm', 'lightning', 'lightning', 'snow', 'hail', 'hail',
     'drizzle', 'drizzle', 'rain', 'rain', 'rain', 'snow', 'snow', 'snow', 'snow',

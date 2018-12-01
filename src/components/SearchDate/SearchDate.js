@@ -2,16 +2,14 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import actions from '../../actions/weather';
-// import { DateFormatInput } from 'material-ui-next-pickers';
 
 class SeacrhDate extends Component {
   state = {
-    date: `${(new Date()).getFullYear()}-${(new Date()).getMonth() + 1}-${(new Date()).getDate()}`,
-    now: `${(new Date()).getFullYear()}-${(new Date()).getMonth() + 1}-${(new Date()).getDate()}`
+    date: `${(new Date()).getFullYear()}-${(new Date()).getMonth() + 1}-${(new Date()).getDate() < 10 ? '0' : ''}${(new Date()).getDate()}`,
+    now: `${(new Date()).getFullYear()}-${(new Date()).getMonth() + 1}-${(new Date()).getDate() < 10 ? '0' : ''}${(new Date()).getDate()}`
   };
 
   onChangeDate = date => {
-    console.log('Date: ', date.target.value);
     this.setState({ date: date.target.value });
     const { disp } = this.props;
 
@@ -49,6 +47,8 @@ export default connect(
   dispatch => ({
     disp: date => {
       dispatch(actions.setSearchDate(date));
+      dispatch(actions.fetchWeather());
     }
-  })
+  }
+  )
 )(SeacrhDate);

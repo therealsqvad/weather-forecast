@@ -11,9 +11,8 @@ import Filter from '../Filter/Filter';
 
 class App extends Component {
   componentDidMount() {
-    const { disp, store } = this.props;
+    const { disp } = this.props;
 
-    console.log(store);
     disp();
   }
 
@@ -22,7 +21,6 @@ class App extends Component {
     const { weather } = store;
     const { forecast } = weather;
 
-    console.log('forecast in app', forecast);
     const {
       temp, icon, city, country, dayMax, dayMin, dayCode
     } = forecast;
@@ -34,7 +32,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <Filter style={{ flexDirection: 'row' }} />
+          <Filter />
           <WeatherPage />
           <div style={{ flexDirection: 'row' }}>
             <div style={{ float: 'left' }}>

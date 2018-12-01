@@ -1,3 +1,4 @@
+// eslint-disable-next-line consistent-return
 export default async() => {
   if (navigator.geolocation) {
     const promise = new Promise((resolve, reject) => {
